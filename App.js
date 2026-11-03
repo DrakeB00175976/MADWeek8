@@ -7,7 +7,7 @@ import BmiScreen from "./components/BmiScreen";
 export default function App() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  //const [currentScreen, setCurrentScreen] = useState("form"); // "form" or "bmi" uncomment this after establishing db connection
+  const [currentScreen, setCurrentScreen] = useState("form"); // "form" or "bmi" uncomment this after establishing db connection
   const handleSubmit = async () => {
     if (!name || !email) {
       //Alert.alert("Error", "Please fill in both fields");
@@ -21,7 +21,7 @@ export default function App() {
       alert("Data saved successfully"); 
       setName("");
       setEmail("");
-      // setCurrentScreen("bmi"); //uncheck this line for BMI
+      setCurrentScreen("bmi"); //uncheck this line for BMI
     } catch (error) {
       console.error(error);
       //Alert.alert("Error", "Could not save data");
@@ -31,7 +31,7 @@ export default function App() {
 
   //uncheck the following block of the code for BMI
   // If the state is set to "bmi", render the BmiScreen component instead
-  /* if (currentScreen === "bmi") {
+   if (currentScreen === "bmi") {
     return (
       <View style={{ flex: 1 }}>
         <BmiScreen />
@@ -41,7 +41,7 @@ export default function App() {
         </View>
       </View>
     );
-  } */
+  } 
 
   return (
     <View style={styles.container}>

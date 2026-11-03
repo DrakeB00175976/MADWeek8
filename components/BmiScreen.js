@@ -3,14 +3,41 @@ import { StyleSheet, Text, TextInput, View, Button } from "react-native";
 
 export default function BmiScreen() {
   //TODO set all you constants here
+  const [weightInput, setWeightInput] = useState("");
+  const [heightInput, setHeightInput] = useState("");
+  const [bmiResult, setBmiResult] = useState(null);
+  const [bmiCategory, setBmiCategory] = useState("");
 
   const calculateBmi = () => {
     //TODO calculation code goes here
+    const weight = parseFloat(weightInput);
+    const height = parseFloat(heightInput);
+    if (isNaN(weight) || isNaN(height) || height === 0) {
+      alert("Please enter valid weight and height");
+      return;
+    }
+    const bmi = weight / (height * height);
+    setBmiResult(bmi.toFixed(2));
+    let category = "";
+    if (bmi < 18.5) category = "Underweight";
+    else if (bmi < 24.9) category = "Normal weight";
+    else if (bmi < 29.9) category = "Overweight";
+    else category = "Obesity";
+    setBmiCategory(category);  //bmiCategory = category;
+    
   };
 
   return (
     <View style={styles.container}>
-        //TODO creating text component goes here
+        <Text style={styles.title}>BMI Calculator</Text>
+        <Text style={styles.label}>Enter your Weight (kg):</Text>
+        <TextInput style={styles.input} keyboardType="numeric" value={weightInput} onChangeText={setWeightInput} />
+        <Text style={styles.label}>Enter your Height (m):</Text>
+        <TextInput style={styles.input} keyboardType="numeric" value={heightInput} onChangeText={setHeightInput} />
+        <Button title="Calculate BMI" onPress={calculateBmi} />
+          <Text style={styles.resultText}>BMI: {bmiResult} </Text>
+          <Text style={styles.categoryText}>Category: {bmiCategory} </Text>
+        
      </View>
   );
 }
